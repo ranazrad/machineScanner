@@ -12,11 +12,11 @@ def get_online_machines():
                     # Can be commented
                     print("Id: {0}\nPlatform: {1}\nType: {2}\nPublic IPv4: {3}\nAMI: {4}\nState: {5}\n".format(instance.id, instance.platform, instance.instance_type, instance.public_ip_address, instance.image.id, instance.state))
 
-interval = os.environ.get('interval')
-if interval == None:
+interval = os.environ.get('INTERVAL')
+if INTERVAL == None:
     get_online_machines()
 else:
     while True:
         get_online_machines()
-        print("Sleep for {0} seconds".format(interval))
-        time.sleep(int(interval))
+        print("Sleep for {0} seconds".format(INTERVAL))
+        time.sleep(int(INTERVAL))
