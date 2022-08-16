@@ -8,6 +8,9 @@ USER ${USER}
 WORKDIR /home/${USER}
 
 COPY . .
-RUN pip install -r requirements.txt 
+RUN mkdir /home/${USER}/.aws && \
+    mv config /home/${USER}/.aws && \
+    mv credentials /home/${USER}/.aws && \
+    pip install -r requirements.txt 
 
 CMD ["python", "run.py"]
