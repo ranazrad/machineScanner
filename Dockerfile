@@ -9,8 +9,10 @@ WORKDIR /home/${USER}
 
 COPY . .
 RUN mkdir /home/${USER}/.aws && \
-    echo $AWS_REGION > /home/${USER}/.aws/config
-    echo $AWS_ACCESS_KEY_ID > /home/${USER}/.aws/credentials && \
+    echo [default] > /home/${USER}/.aws/config && \
+    echo $AWS_REGION >> /home/${USER}/.aws/config && \
+    echo [default] > /home/${USER}/.aws/credentials && \
+    echo $AWS_ACCESS_KEY_ID >> /home/${USER}/.aws/credentials && \
     echo $AWS_SECRET_ACCESS_KEY >> /home/${USER}/.aws/credentials && \
     echo $AWS_SESSION_TOKEN >> /home/${USER}/.aws/credentials && \
     pip install -r requirements.txt 
