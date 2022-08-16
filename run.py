@@ -2,8 +2,6 @@ import os
 import boto3
 import time
 
-kms = boto3.client('kms', region_name='eu-west-1')
-
 def get_online_machines():
     ec2 = boto3.resource('ec2')
     for instance in ec2.instances.all():
