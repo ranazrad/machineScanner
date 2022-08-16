@@ -19,7 +19,7 @@ pipeline {
         }
         stage('SCM') {
             steps {
-                git url: 'https://github.com/ranazrad/machineScanner.git', branch: 'main'
+                git url: 'https://github.com/ranazrad/machineScanner.git', branch: 'master'
             }
         }
         stage('Build') {
