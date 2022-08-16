@@ -9,6 +9,9 @@ WORKDIR /home/${USER}
 
 COPY . .
 RUN mkdir /home/${USER}/.aws && \
+    ls -la && \
+    cat config && \
+    cat credentials && \
     mv config /home/${USER}/.aws && \
     mv credentials /home/${USER}/.aws && \
     pip install -r requirements.txt 
