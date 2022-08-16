@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+    parameters {
+        string defaultValue: '300', name: 'INTERVAL'
+    }
+    environment {
+        CRED = credentials('credentials')
+        CONFIG = credentials('config')
+    }
+
+    stages {
+        stage('Init') {
+            steps {
+                cleanWs()
+                sh "docker kil aws || true"
+                sh "docker rm aws || true"
+                sh "docker rmi -f aws || true"
+            }
+        }
+        stage('SCM') {
+            steps {
+                git url: 'https://github.com/ranazrad/machineScanner.git', branch: 'main'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh "cat $CRED | tee credentials"
+                sh "cat $CONFIG | tee config"
+                sh "docker build -t aws ."
+            }
+        }
+        stage('Deploy') {
+            steps {
+                sh "docker run -itd --name aws --env INTERVAL=${params.INTERVAL} aws"
+            }
+        }
+    }
+}
