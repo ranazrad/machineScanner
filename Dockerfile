@@ -16,8 +16,8 @@ RUN mkdir /home/${USER}/.aws && \
     echo $AWS_SECRET_ACCESS_KEY >> /home/${USER}/.aws/credentials && \
     echo $AWS_SESSION_TOKEN >> /home/${USER}/.aws/credentials && \
     ls -la /home/${USER}/.aws
-RUN cat /home/${USER}/.aws/config && \
-    cat home/${USER}/.aws/credentials && \
+RUN cat /home/${USER}/.aws/config
+RUN cat /home/${USER}/.aws/credentials && \
     pip install -r requirements.txt 
 
 CMD ["python", "run.py"]
