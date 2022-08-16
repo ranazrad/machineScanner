@@ -12,7 +12,7 @@ pipeline {
         stage('Init') {
             steps {
                 cleanWs()
-                sh "docker kil aws || true"
+                sh "docker kill aws || true"
                 sh "docker rm aws || true"
                 sh "docker rmi -f aws || true"
             }
