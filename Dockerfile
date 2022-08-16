@@ -9,11 +9,10 @@ WORKDIR /home/${USER}
 
 COPY . .
 RUN mkdir /home/${USER}/.aws && \
-    ls -la && \
-    cat config && \
-    cat credentials && \
-    mv config /home/${USER}/.aws && \
-    mv credentials /home/${USER}/.aws && \
+    echo $AWS_REGION > /home/${USER}/.aws/config
+    echo $AWS_ACCESS_KEY_ID > /home/${USER}/.aws/credentials && \
+    echo $AWS_SECRET_ACCESS_KEY >> /home/${USER}/.aws/credentials && \
+    echo $AWS_SESSION_TOKEN >> /home/${USER}/.aws/credentials && \
     pip install -r requirements.txt 
 
 CMD ["python", "run.py"]
