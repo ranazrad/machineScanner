@@ -37,6 +37,8 @@ pipeline {
         stage('Logs') {
             steps {
                 sh "docker logs aws > aws.txt"
+                sh "docker ps -a"
+                sh "docker ps -a >> aws.txt"
                 sh "cat aws.txt"
             }
         }
