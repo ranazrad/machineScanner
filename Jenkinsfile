@@ -34,5 +34,10 @@ pipeline {
                 sh "docker run -itd --name aws --env INTERVAL=${params.INTERVAL} aws"
             }
         }
+        stage('Logs') {
+            steps {
+                sh "docker logs aws"
+            }
+        }
     }
 }
